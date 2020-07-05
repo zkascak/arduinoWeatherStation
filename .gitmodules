@@ -1,0 +1,9 @@
+[submodule "libraries/adafruit_sensor"]
+	path = libraries/adafruit_sensor
+	url = https://github.com/zkascak/Adafruit_Sensor.git
+[submodule "libraries/adafruit_BMP085_Unified"]
+	path = libraries/adafruit_BMP085_Unified
+	url = https://github.com/zkascak/Adafruit_BMP085_Unified.git
+[submodule "libraries/SparkFun_HIH4030_Arduino_Library"]
+	path = libraries/SparkFun_HIH4030_Arduino_Library
+	url = https://github.com/zkascak/SparkFun_HIH4030_Arduino_Library.git
