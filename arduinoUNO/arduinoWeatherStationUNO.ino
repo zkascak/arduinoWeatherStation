@@ -4,6 +4,7 @@
  * Board: UNO
  * Author: Zachary Kascak
  * Date: 8 July 2020
+ * 
  *******************************************/
 #include <Wire.h>
 
