@@ -3,7 +3,7 @@
  * 
  * Board: UNO
  * Author: Zachary Kascak
- * Date: 8 July 2020
+ * Date: 9 July 2020
  * 
  *******************************************/
 #include <Wire.h>
@@ -23,6 +23,7 @@ void loop() {
     float analogTempReading = 0;
     float resistance = 0.0;
     float steinhart = 0.0;
+    float photocell = 0.0;
 
     // Collect Analog Temp Reading
     Serial.print("Analog Temp: ");
@@ -37,5 +38,10 @@ void loop() {
     steinhart -= 273.15;
     Serial.print(steinhart);
     Serial.println(" C");
+
+    // Collect data from the photocell
+    photocell = analogRead(A1);
+    Serial.print("Photocell Reading: ");
+    Serial.println(photocell);
     delay(1000);
 }
