@@ -14,8 +14,10 @@
 #define Nominal_Resistance 10000
 #define Nominal_Temperature 25
 #define BCoefficient 3950
-#define HIH4030_OUT A2
+#define HIH4030_OUT A4
 #define HIH4030_SUPPLY 5
+#define VMA230_OUT A2
+#define PHOTOCELL_OUT A3
 
 // Library Variables
 HIH4030 sensorSpecs(HIH4030_OUT, HIH4030_SUPPLY);
@@ -34,7 +36,7 @@ void loop() {
 
     // Collect Analog Temp Reading
     Serial.print("Analog Temp: ");
-    analogTempReading = analogRead(A0);
+    analogTempReading = analogRead(VMA230_OUT);
     resistance = (1023 / analogTempReading) -1;
     resistance = SeriesResistor / resistance;
     steinhart = resistance / Nominal_Resistance;
@@ -47,7 +49,7 @@ void loop() {
     Serial.println(" C");
 
     // Collect data from the photocell
-    photocell = analogRead(A1);
+    photocell = analogRead(PHOTOCELL_OUT);
     Serial.print("Photocell Reading: ");
     Serial.println(photocell);
 
