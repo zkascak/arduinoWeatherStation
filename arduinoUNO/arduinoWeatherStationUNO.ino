@@ -1,16 +1,18 @@
 /*******************************************
  * 
  * Arduino Weather Station
- * 
  * Board: UNO
  * Author: Zachary Kascak (@zkascak)
- * Date: 24 July 2020
+ * Date: 25 July 2020
  * 
  *******************************************/
 #include <Wire.h>
 #include <SparkFun_HIH4030.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BMP085_U.h>
+#include <SPI.h>
+#include <SD.h>
+#include <Ethernet.h>
 
 // Global Variables
 #define SeriesResistor 10000
@@ -21,6 +23,8 @@
 #define HIH4030_SUPPLY 5
 #define VMA230_OUT A0
 #define PHOTOCELL_OUT A1
+byte mac[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+IPAddress ip=(192, 168, 1, 177);
 
 // Library Variables
 HIH4030 sensorSpecs(HIH4030_OUT, HIH4030_SUPPLY);
