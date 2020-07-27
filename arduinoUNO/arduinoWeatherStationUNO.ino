@@ -3,9 +3,10 @@
  * Arduino Weather Station
  * Board: UNO
  * Author: Zachary Kascak (@zkascak)
- * Date: 25 July 2020
+ * Date: 27 July 2020
  * 
  *******************************************/
+
 #include <Wire.h>
 #include <SparkFun_HIH4030.h>
 #include <Adafruit_Sensor.h>
@@ -25,6 +26,12 @@
 #define PHOTOCELL_OUT A1
 byte mac[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 IPAddress ip=(192, 168, 1, 177);
+
+// Define Structures
+struct humidityData {
+    float rh;
+    float trh;
+}
 
 // Library Variables
 HIH4030 sensorSpecs(HIH4030_OUT, HIH4030_SUPPLY);
@@ -54,6 +61,7 @@ void loop() {
     float humiditySensor = 0.0;
     float bmpTemperature = 0.0;
     float sealevelPressure = 1019.8;
+    struct humidityData humidityReading;
 
     // Collect Analog Temp Reading
     Serial.print("Analog Temp: ");
@@ -75,7 +83,7 @@ void loop() {
     Serial.println(photocell);
 
     // Collect data from humoidity sensor
-    printHumidityData(sensorSpecs, steinhart);
+    humidityData printHumidityData(sensorSpecs, steinhart);
 
     // Collect temperature and barometric pressure data from BMP180
     sensors_event_t event;
@@ -101,10 +109,15 @@ void loop() {
     delay(1000);
 }
 
-void printHumidityData(HIH4030 sensor, float temperature){
+struct humidityData printHumidityData(HIH4030 sensor, float temperature){
+    // Define Variables
+    struct humidityData humidityReading;
+
+    humidityReading.rh = sensor.getSensorRH();
+    humidityReading.trh = sensot.getTrueRH();
     Serial.println("Humidity:");
     Serial.print("\tRH: ");
-    Serial.print(sensor.getSensorRH());
+    Serial.print(humidityReading.rh;
     Serial.println("%");
     Serial.print("\tTH: ");
     Serial.print(sensor.getTrueRH(temperature));
@@ -117,4 +130,5 @@ void printHumidityData(HIH4030 sensor, float temperature){
     Serial.print(dewPoint);
     Serial.println("C");
 
+    return humidityReading;
 }
